@@ -1,0 +1,193 @@
+ctrl z - show terminal
+fg - return to vim
+:%s/old/new/g - replace every occurency of old to new (s == substitute)
+
+
+          Basic file ops
+
+:w - write
+:q - quit (if saved)
+:wq - write then quit [== :x]
+:q! - quit without saving
+:100,$w newfile - writes lines 100 through eof to {newfile}
+:220,$w >> filename - appends lines 220 to eof to {filename}
+:r filename - reads(pastes) from filename to current file after cursor
+	:r$ filename - r from eof
+	:r0 filename - r to beginning of curr file
+:args - shows all opened files
+ctrl^ - switch to last file
+
+:tabnew filename - opens filename in new tab
+
+:sp filename - split (filename optional)
+
+
+          Simple editing
+
+Modes:
+  i - insert(I[to start of line])
+	  5isometext - inserts sometext 5 times
+  a - append(A[to eol])
+  o - empty line below(O[above])
+  v - visual mode (V[line], ^v[block])
+  R - override text(starting with curr char)
+  s - del curr char and enters insert mode
+  S - del curr line and enters imsert mode
+  num+i/o+sequence+esc - sequence inserned num times
+
+Suffixes:
+  w - jump to beginning of word {word=letters or punctuation}
+  W - jump to beginning of Word {Word=letters and punctuation}
+  b - beginning of word or punctuation
+  B - beginning of word, whitespace divided
+  0(zero) - beginning of line
+  $ - eol
+  e/E - end of word/Word
+ 
+> - indent (5>> - indent 5 lines)
+. - repeat last command
+u - undo [U - restore current line]
+^r - redo
+
+~ - switch upper/lower case
+r[ch] - replace current character on [ch]
+x - delete single char
+    pasteble, x->p transponce 2 letters
+
+c - change(cw, cc[whole line], C[to the eol], cw, 2cw)
+    cuts portion of text and enters insert mode.
+    pasteble(puts deleted chars in buffer)
+
+y - copy(yw[word], yW, yy[whole line]==Y, y$[till eol], y0[till beg of line])
+
+p - paste (P[paste above])
+
+d - delete(dd[whole line], 2dd[2 lines], db, d$, ..)
+    pasteble(dd->p recover text, like ^c -> ^v)
+
+J - join current line with bottom line
+
+
+         Movement + search
+
+* - search for Word cursor in on
+# - search backwards for Word cursor is on
+/{pattern} - search for pattern forward
+?{pattern} - search for pattern backward
+		also: d?{word} - delete from cursor backwards to {word} included
+
+n - repeat search in same direction[same as /ENTER]
+N - repeat search in reverse direction[same as ?ENTER]
+
+f{x} - search for char x forward in line and move cursor on it
+F{x} - search for char x backward in line and move cursor on it
+t{x} F{x} - same as f/F, cursor muved before char x
+
+G - move to eof
+gg - move to beginning of file
+
+H M L - move to Home/Middle/LastLine of the screen
+
+{} - jump back/front to next white string
+
+() - jump back/front to beginning/end of block
+
+- ^ + - move to first nonblank char in prev/curr/next line
+
+% - when on parentesis, jumps to closing one ( <-> )
+
+
+         Registers
+
+"{reg}{num}{act} - register is a-z letter, num(optional), action
+	"a2yy - copy 2 lines to register 'a'
+	"ap - put content of register 'a' after cursor
+	"zdd - delete line and put it in register 'z'
+
+
+         Ex commands
+
+:sh - opens terminal. to go back - ^b
+
+:!command - executes {command} in the shell
+	:!pwd - shows current working path
+	:r !date - reads date to file
+	:r !sort phones.txt - reads sorted phones.txt
+
+
+d - delete
+m - move
+co - copy
+t - copy lines
+
+*** using ; instead of , as page separator makes 2nd argument relative:
+	:100;+5t$ - find line 100, take 3rd line from it, and copy to eof
+
+{num1},{num2} - range of lines from num1 to num2
+. - current line
+$ - eof
+	:.,$d - delete from curr line to eof
+-/+ - relative line count:
+	:.,+3co-2 - copy/paste from current 3 lines to 2nd line before
+	:-,+t0 - copy 3 lines to beginning of file (prev, curr and next lines)
+% - every line in the file 
+	:%d - erase all file
+	:%t$ - duplicate all lines to eof
+
+:set nu - set numbers (line)
+
+:3,18d - delete lines 3 through 18 inclusive
+
+:16,24m55 - move lines 16 through 24 after line 55
+
+:3,9co120 - copy lines 3 to 9 and paste them after line 120
+
+:20,.co$ - copy lines 20 to current, to the eof
+
+:-5,.y - copy lines from -5 to current (relative numbers) 
+
+
+          Search patterns
+
+:/pattern/d - delete next line containing {pattern}
+:?pattern?m$ - move previous line containing {pattern} to eof
+
+:%s/old/new/g - replace every occurency of old to new (s == substitute)
+
+:g/# FIXME/d deletes all comments containing FIXME
+
+:g/# FIXME/s/FIXME/DONE/ - change all occurencies of comment FIXME to DONE
+
+:g/class="button"/s/esc/ESC/g - makes list of lines containing
+	text 'class="button"', in this list change esc to ESC
+
+
+          Abbreviations
+
+:ab - show list of abbreviations
+
+:ab abbr phrase - saves phrase as abbr
+
+:unab abbr - delete abbreviation abbr
+
+
+          Mapping (macros)
+
+:map x sequence - mapping sequence to key x
+:unmap x
+
+:map #5 dwelp - swaps current word with successing
+	#1 .. #12 - F1 .. F12 (function keys)
+	dwelp == dw|el|p
+
+:map #2 i<li>^[ - maps F2 to: go i mode, insert <li>, exit from insert mode
+:map! #2 <li> - if already in i mode, insert <li>
+
+enter special symbols: Ctrl v 
+                       Enter
+you see special symbol in a sequence as:
+	^[ - escape
+	^M - enter...
+
+:map #5 5i<li></li>^M^[ - insert 5 <li> elements
+

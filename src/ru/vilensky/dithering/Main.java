@@ -24,10 +24,9 @@ public class Main {
             System.exit(1);
         }
 
-        BufferedImage picture = ImageIO.read(file);
+        BufferedImage picture = ImageIO.read(file);//TODO: check if its image file
         final int height = picture.getHeight();
         final int width = picture.getWidth();
-        //picture = Utils.toBufferedImage(picture.getScaledInstance(3840, 2160, Image.SCALE_SMOOTH));
         picture = Utils.toBufferedImage(picture.getScaledInstance(width, height, Image.SCALE_SMOOTH));
 
         int[] pixels = ((DataBufferInt)picture.getRaster().getDataBuffer()).getData();
@@ -62,6 +61,13 @@ public class Main {
         });
 */
         Utils.showImageWindow(picture);
+        try{
+            File output = new File("output.jpeg");
+            ImageIO.write(picture, "jpeg", output);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
     }
 
     private static BufferedImage dithering(BufferedImage img) {
