@@ -39,28 +39,8 @@ public class Main {
 
         picture = dithering(picture);
 
-/*
-        int[] noise = new int[pixels.length];
-        Arrays.setAll(noise, i -> 128 - (int)(Math.random() * 255));
-        Arrays.setAll(pixels, i -> {
-            int color = pixels[i];
-            int bwColor = color & 0xff;
-            int sum = bwColor + noise[i];
-            if (sum > 255) {
-                sum = 255;
-            }
-            if (sum < 0) {
-                sum = 0;
-            }
-            return 0xff000000 | sum & 0xff | ((sum & 0xff) << 8) | ((sum & 0xff) << 16);
-        });
-        Arrays.setAll(pixels, i -> {
-            int color = pixels[i];
-            int bwColor = color & 0xff;
-            return  bwColor > 127 ? 0xffffffff : 0xff000000;
-        });
-*/
         Utils.showImageWindow(picture);
+
         try{
             File output = new File("output.jpeg");
             ImageIO.write(picture, "jpeg", output);
