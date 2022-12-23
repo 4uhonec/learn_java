@@ -23,6 +23,9 @@ public class GenArtBasic extends PApplet{
             line(0, i, width, i);
             n++;
         }
+
+        //since draw() redrawing window infinitely, noLoop() changes this behavior
+        noLoop();
     }
 
     public static void main(String[] args) {
