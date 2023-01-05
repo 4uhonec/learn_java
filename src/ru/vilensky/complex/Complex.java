@@ -1,3 +1,5 @@
+package ru.vilensky.complex;
+
 import java.util.ArrayList;
 
 public class Complex{
@@ -18,20 +20,12 @@ public class Complex{
 
 	//returns angle in radians
 	public double arg(){
-		if(re==0 && im==0)
-			return 0.0;
-
-		if(re != 0)
-			return Math.atan(im/re);
-		else
-			if(re > 0) return Math.toRadians(90);
-
-		return Math.toRadians(270);
+		return Math.atan2(im, re);
 	}
 
 	public Complex getFromPolar(double mod, double arg){
-		return new Complex(mod*Math.cos(arg),
-						   mod*Math.sin(arg));
+		return new Complex(round(mod*Math.cos(arg)),
+						   round(mod*Math.sin(arg)));
 	}
 
 	public Complex add(Complex other){
@@ -71,6 +65,7 @@ public class Complex{
 		double mod = Math.pow(this.mod(), 1.0/(double)n);
 		for(int k = 0; k<n; k++){
 			double arg = ((theta + 2.0*Math.PI*(double)k)/(double)n);
+			//arg = round(arg);
 			roots.add(getFromPolar(mod, arg));
 		}
 		return roots;
@@ -87,21 +82,19 @@ public class Complex{
 	@Override
 	public String toString(){
 		StringBuffer str = new StringBuffer();
-		str.append(this.re);
+		if(re != 0)
+			str.append(this.re);
 		if(im>0){
-			str.append("+" + im + "i");
+			str.append("+").append(im).append("i");
 		}else if(im<0)
-			str.append(im + "i");
+			str.append(im).append("i");
 		return str.toString();
 	}
 
-	public static void main(String[] args){
-
-		Complex z = new Complex(-1, 0);
-		ArrayList<Complex> l = z.root(2);
-		for(Complex c : l){
-			System.out.println(c);
-
-		}
+	//have to round Im and Re values due to non-ideal approximation
+	private double round(double num){
+		num = Math.round(num * 10000000.0) / 10000000.0;
+		return num;
 	}
+
 }
