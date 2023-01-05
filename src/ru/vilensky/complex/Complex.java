@@ -83,13 +83,24 @@ public class Complex{
 	public Complex conjugate(){
 		return new Complex(re, -im);
 	}
+	
+	@Override
+	public String toString(){
+		StringBuffer str = new StringBuffer();
+		str.append(this.re);
+		if(im>0){
+			str.append("+" + im + "i");
+		}else if(im<0)
+			str.append(im + "i");
+		return str.toString();
+	}
 
 	public static void main(String[] args){
 
 		Complex z = new Complex(-1, 0);
 		ArrayList<Complex> l = z.root(2);
 		for(Complex c : l){
-			System.out.println(c.re+c.im+"i");
+			System.out.println(c);
 
 		}
 	}
