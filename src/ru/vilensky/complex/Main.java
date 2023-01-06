@@ -10,7 +10,5 @@ public class Main {
         for(Complex c : l){
             System.out.println(c);
         }
-
-        //System.out.println();
     }
 }

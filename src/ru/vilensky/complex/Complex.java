@@ -65,7 +65,6 @@ public class Complex{
 		double mod = Math.pow(this.mod(), 1.0/(double)n);
 		for(int k = 0; k<n; k++){
 			double arg = ((theta + 2.0*Math.PI*(double)k)/(double)n);
-			//arg = round(arg);
 			roots.add(getFromPolar(mod, arg));
 		}
 		return roots;
@@ -81,6 +80,8 @@ public class Complex{
 	
 	@Override
 	public String toString(){
+		if(re == 0.0 && im == 0.0)
+			return "0";
 		StringBuffer str = new StringBuffer();
 		if(re != 0)
 			str.append(this.re);
