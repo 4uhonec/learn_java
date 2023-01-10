@@ -1,5 +1,6 @@
 package ru.vilensky.heap;
 
+//TODO: make it generic
 public class Heap {
 
     private int size;

@@ -23,7 +23,7 @@ public class Sort <E extends Comparable<E>>{
         return array;
     }
 
-    public E[] insert(E[] array){
+    public E[] insertion(E[] array){
         int len = array.length;
         return null;
     }
