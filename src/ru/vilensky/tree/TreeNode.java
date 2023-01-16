@@ -1,11 +1,11 @@
-//package ru.vilensky.tree;
+package ru.vilensky.tree;
 import java.util.*;
 
 public class TreeNode<T, N extends TreeNode<T,N>>{
-	
-	N parent;
-	ArrayList<N> children;
+
 	T data;
+	ArrayList<N> children;
+	N parent;
 
 	public TreeNode(){}
 
@@ -15,5 +15,9 @@ public class TreeNode<T, N extends TreeNode<T,N>>{
 		this.parent = parent;
 	}
 
-
+	public interface TypeAdapter<T, N>{
+		N newInstance();
+		boolean isChildOf(T parentNodeData, T childNodeData);
+		boolean isTopLevelItem(T data);
+	}
 }
