@@ -1,4 +1,6 @@
 package ru.vilensky.generative_art;
+import java.security.SecureRandom;
+
 import processing.core.PApplet;
 import processing.core.PShape;
 
@@ -17,31 +19,28 @@ public class GenArtBasic extends PApplet implements Consts{
     public void draw(){
         background(255);
 
-        
-        /*strokeWeight(1);
-        int n = 1;
-
-        for(int i = 1; i<width; i+=n){
-            stroke(0);
-            line(0, i, width, i);
-            n++;
-        }*/
-
         //since draw() redrawing window infinitely, noLoop() changes this behavior
         noLoop();
     }
 
     //TODO: move constants to Const.java
     public static PShape[] getRectArray(){
-        int numOfRects = 10;
-        int rectSize =70;
-        int gapSize = 20;
-        int x1 = WIDTH - (rectSize*numOfRects + gapSize*(numOfRects - 1))
-        PShape[] rectArray = new PShape[10];
-
+        SecureRandom random = new SecureRandom();
+        int x1 = WIDTH - (RECT_SIZE*NUM_OF_RECTS + GAP_SIZE*(NUM_OF_RECTS - 1));
+        int y1 = x1;
+        PShape[] rectArray = new PShape[NUM_OF_RECTS*NUM_OF_RECTS];
+        int counter = 0;
+        
+        for(int i = 0; i < NUM_OF_RECTS; i++){
+            for (int j = 0; j < NUM_OF_RECTS; j++) {
+                PShape pShape = 
+            }
+        }
 
         return rectArray;
     }
+
+    public static PShape makeShape(color c, )
 
     public static void main(String[] args) {
         PApplet.main("ru.vilensky.generative_art.GenArtBasic");
