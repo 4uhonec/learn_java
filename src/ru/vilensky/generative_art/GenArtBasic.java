@@ -50,7 +50,6 @@ public class GenArtBasic extends PApplet implements Consts{
                 rectArray[counter+6] = x1 + (random.nextFloat(2) - 1)*(i+j)*LAMBDA;
                 rectArray[counter+7] = y1 + RECT_SIZE + (random.nextFloat(2) - 1)*(i+j)*LAMBDA;
                 counter+=8;
-                System.out.print(x1+" "+y1+"--");
                 x1 += RECT_SIZE + GAP_SIZE;
             }
             x1 = (WIDTH - (RECT_SIZE*NUM_OF_RECTS + GAP_SIZE*(NUM_OF_RECTS - 1)))/2;
